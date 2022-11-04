@@ -13,12 +13,15 @@ const Theme = {
   },
 };
 
+
 const DOM = {
   root: document.documentElement,
 };
 
 function changeTheme(theme) {
-  theme.forEach((color, key) => {
-    DOM.root.style.setProperty(key, color);
-  });
+  Object.keys(theme).forEach(function(key) {
+    DOM.root.style.setProperty(key, theme[key])
+ });
 }
+
+changeTheme(Theme.Avocado)

@@ -1,8 +1,9 @@
 :root {
     --bgTopColor: #f6e8d8;
     --bgMidColor:#d09050;
-    --bgBottomColor: #782511;
-    --barColor: #e0b781
+    --bgBottomColor: #722511;
+    --barColor: #e0b781;
+    --barText: #322222;
 }
 
 body {   
@@ -22,5 +23,50 @@ body {
     left:0px;
     top: 0px;
     background-color: var(--barColor);
+    display: grid;
+    grid-template-rows: auto auto auto auto auto;
     box-shadow: 0px 1px 4px black;
+
+}
+
+
+#ThemeMenuIcon {
+    grid-row: 5;
+    color: var(--barText);
+    margin: 0px 50px;
+}
+#ThemeMenuIcon:hover {
+      text-decoration: underline;
+  
+}
+#ThemeMenuIcon  + #ThemeDropDownMenu {
+    display: none;
+    position: fixed;
+    left: 50px;
+    top: 50px;
+    width: 125px;
+}
+
+
+#ThemeDropDownMenu div {
+    background-color: rgb(225,225,225);
+    border: 1px solid black;
+    width: 100%;
+    font-size: 16px;
+    padding: 6px;
+    margin: 0px;
+    text-align: center;
+    transition: all 0.099s;
+}
+#ThemeDropDownMenu div:hover {
+    text-decoration: underline;
+}
+#ThemeMenuIcon + #ThemeDropDownMenu:hover {
+    display: inline-flex;
+    flex-direction: column;
+}
+
+#ThemeMenuIcon:hover + #ThemeDropDownMenu {
+    display: inline-flex;
+    flex-direction: column;
 }

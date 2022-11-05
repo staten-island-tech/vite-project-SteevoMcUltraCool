@@ -28,6 +28,61 @@ const Theme = {
     "--barText":  "#bfd74b"
   },
 };
+class _Date {
+  constructor(month, day, year) {
+    this.M = month
+    this.D = day,
+    this.Y = year
+  }
+  youngerThanOE2(_date){ 
+    if (this.Y == _date.Y) {
+      if (this.M == _date.M) {
+        return ((this.D <= _date.D) && true) || false
+
+      } else{
+        return ((this.M < _date.M) && true) || false
+      }
+    } else{
+      return ((this.Y < _date.Y) && true) || false
+    }
+  }
+  toNumber() { //not 100% accurate but not horrible.
+    return (this.Y * 365) + ((this.M-1) * 30) + this.D
+  }
+}
+
+class TateCard {
+  constructor(QOLArray,RFPArray,TechArray) {
+    this.QOLStats = {
+      Header: QOLArray[0],
+      Image: QOLArray[1],
+      Bio: QOLArray[2],
+    }
+    this.RFPData = { //relevant for purchase
+      Price: RFPArray[0],
+      CreatedOn: RFPArray[1],
+      ForSale: RFPArray[2],
+    }
+    this.Technical = {
+      TokenID: TechArray[0],
+      OwnerID: TechArray[1],
+    }
+  }
+}
+
+let GrandSelection = [ //need tp find images for all the cards
+  new TateCard(
+    ["Sunglassed Andrew","url(https://pbs.twimg.com/media/FaiQfW7WAAAAC5x.jpg)","A glorious NFT of Andrew Tate wearing sunglasses. This amazing NFT is worth every penny." ],
+    [65, new _Date(6, 22, 2022), true] , ["0xTFT2323116","0xUPD7694302"] 
+  ),
+  new TateCard(
+    ["Kickboxing Andrew","url(https://pbs.twimg.com/media/FaiQfW7WAAAAC5x.jpg)", "Our renouwned kickboxing world champion strikes hard and fast. What an incredible image!"],
+    [149, new _Date(8, 12, 2022), true] , ["0xTFT2309012","0xUPD7614801"] 
+  ),
+]
+
+
+
 
 
 const DOM = {
@@ -66,3 +121,7 @@ function adjustTDDMposition() {
 }
 adjustTDDMposition()
 window.onresize = adjustTDDMposition
+
+function loadTateCards() {
+  
+}

@@ -3,7 +3,7 @@ const Theme = {
     "--bgTopColor": "#f6e8d8",
     "--bgMidColor": "#d09050",
     "--bgBottomColor": "#682511",
-    "--barColor": "#e0b781",
+    "--barColor": "#EFD2A8",
     "--barText":  "#332511"
   },
   Avocado: {
@@ -18,7 +18,8 @@ const Theme = {
 
 const DOM = {
   root: document.documentElement,
-  TDDM: document.getElementById("ThemeDropDownMenu")
+  TDDM: document.getElementById("ThemeDropDownMenu"),
+  ThemeMenuSelector: document.getElementById("ThemeMenuIcon")
 };
 
 function changeTheme(theme) {
@@ -46,3 +47,9 @@ function loadThemeDropDownMenu() {
   } )
 }
 loadThemeDropDownMenu()
+function adjustTDDMposition() {
+  let x = DOM.ThemeMenuSelector.getBoundingClientRect().left
+  DOM.TDDM.style.setProperty("--x",`${x - 25}px`)
+}
+adjustTDDMposition()
+window.onresize = adjustTDDMposition

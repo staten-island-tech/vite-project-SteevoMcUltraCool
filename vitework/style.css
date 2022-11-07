@@ -36,10 +36,22 @@ body {
     margin: 0px 50px;
     padding-top: 32px;
     height: 100%;
+    grid-row: 1;
+}
+#AboutUsIcon {
+    grid-column: 1;
+    grid-row: 1;
+    color: var(--barText);
+    margin: 0px 50px;
+    padding-top: 32px;
+    height: 100%;
 }
 #ThemeMenuIcon:hover {
       text-decoration: underline;
   
+}
+#AboutUsIcon:hover {
+    text-decoration: underline;
 }
 #ThemeMenuIcon  + #ThemeDropDownMenu {
     --x: 500px;
@@ -49,10 +61,22 @@ body {
     top: 50px;
     width: 125px;
 }
+#AboutUsIcon  + #AboutUsDropdownMenu {
+    display: none;
+    position: fixed;
+    left : 0px;
+    top: 50px;
+    width: 125px;
+    height: 100px;
+    background-color: var(--bgMidColor);
+}
+#AboutUsIcon:hover  + #AboutUsDropdownMenu {
+    display:inline;
+}
 
 
 #ThemeDropDownMenu div {
-    background-color: rgb(225,225,225);
+    background-color: var(--bgMidColor);
     border: 1px solid black;
     width: 100%;
     font-size: 16px;
@@ -82,4 +106,5 @@ h1 {
     font-weight: bold;
     text-decoration: underline;
     grid-column: 3;
+    grid-row: 1;
 }

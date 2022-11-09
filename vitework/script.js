@@ -5,6 +5,8 @@ const Theme = {
     "--bgBottomColor": "#cecece",
     "--barColor": "#dddddd",
     "--barText": "#020202",
+    "--fontColor": "#000",
+    "--cardBorder": "#999",
   },
   "Basic Dark": {
     "--bgTopColor": "#010101",
@@ -12,6 +14,8 @@ const Theme = {
     "--bgBottomColor": "#262626",
     "--barColor": "#404040",
     "--barText": "#f9f9f9",
+    "--fontColor": "#EAEAEA",
+    "--cardBorder": "#bbb",
   },
   Toast: {
     "--bgTopColor": "#f6e8d8",
@@ -19,6 +23,8 @@ const Theme = {
     "--bgBottomColor": "#682511",
     "--barColor": "#EFD2A8",
     "--barText": "#332511",
+    "--fontColor": "#000",
+    "--cardBorder": "#522714",
   },
   Avocado: {
     "--bgTopColor": "#f9f5b6",
@@ -26,6 +32,8 @@ const Theme = {
     "--bgBottomColor": "#123512",
     "--barColor": "#602c18",
     "--barText": "#bfd74b",
+    "--fontColor": "#000",
+    "--cardBorder": "#bad149",
   },
 };
 function sleep(delayMs) {
@@ -49,15 +57,22 @@ class _Date {
       return (this.Y < _date.Y && true) || false;
     }
   }
-  toNumber() {
-    //not 100% accurate but not horrible.
-    return this.Y * 365 + (this.M - 1) * 30 + this.D;
+  toString() {
+    let M = this.M;
+    let D = this.D;
+    if (this.M < 10) {
+      M = `0${this.M}`;
+    }
+    if (this.D < 10) {
+      D = `0${this.M}`;
+    }
+    return `${M}/${D}/${this.Y}`;
   }
 }
 
 class TateCard {
   constructor(QOLArray, RFPArray, TechArray) {
-    this.QOLStats = {
+    this.Display = {
       Header: QOLArray[0],
       Image: QOLArray[1],
       Bio: QOLArray[2],
@@ -101,6 +116,7 @@ const DOM = {
   root: document.documentElement,
   TDDM: document.getElementById("ThemeDropDownMenu"),
   ThemeMenuSelector: document.getElementById("ThemeMenuIcon"),
+  mommy: document.getElementById("mommy"),
 };
 
 let currentTheme = Theme["Basic Light"];
@@ -159,5 +175,31 @@ function adjustTDDMposition() {
 }
 adjustTDDMposition();
 window.onresize = adjustTDDMposition;
-
-function loadTateCards() {}
+function boolToForSale(boolean) {
+  if (boolean) {
+    return "Up for Sale.";
+  }
+  return "Not purchasable";
+}
+function loadTateCards(filter) {
+  let mommySTR = "";
+  let LoadCardToString = function (card) {
+    mommySTR = `${mommySTR} 
+    <div class="TC">
+      <h3>${card.Display.Header}</h3>
+      <div class="stats">
+        <div class="image" style="background-image:${card.Display.Image}"></div>
+        <div class="text">
+          <p>Price: ${card.RFPData.Price}</p>
+          <p>Created On: ${card.RFPData.CreatedOn.toString()}</p>
+          <p>Created On: ${boolToForSale(card.RFPData.ForSale)}</p>
+        </div>
+        <p>${card.Display.Bio}</p>
+      </div>
+    </div>
+    `;
+  };
+  GrandSelection.forEach(LoadCardToString);
+  DOM.mommy.innerHTML = mommySTR;
+}
+loadTateCards();

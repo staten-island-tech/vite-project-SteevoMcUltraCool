@@ -124,11 +124,39 @@ h1 {
 }
 #mommy .TC {
     width: 400px;
-    min-width: 30%;
+    min-width: 24%;
     max-width: 100%;
     aspect-ratio: 1;
     border-radius: 20px;
     margin: 50px 50px;
     background-color: var(--barColor);
     border: 4px solid var(--cardBorder)
+}
+.stats {
+    width: 100%;
+    height: 60%;
+    border: 2px solid var(--cardBorder);
+    display: flex;
+    flex-wrap: nowrap;
+}
+.stats .image {
+    width: 50%;
+    height: 100%;
+    background-attachment:local;
+    background-size: 100% 100%;
+    background-position: 0px 0px;
+    background-origin: border-box;
+}
+.stats .text {
+    width: 50%;
+    height: 100%;
+}
+#mommy h3 {
+    text-align: center;
+    margin: 5px 0px;
+    font-size: 30px;
+}
+.stats p {
+    font-size: 18px;
+    margin-bottom: 40px;
 }

@@ -104,7 +104,7 @@ let GrandSelection = [
   new TateCard(
     [
       "Kickboxing Andrew",
-      "url(https://pbs.twimg.com/media/FaiQfW7WAAAAC5x.jpg)",
+      "url(https://talksport.com/wp-content/uploads/sites/5/2022/08/Screenshot-2022-08-05-172052.jpg?strip=all&w=705&quality=40)",
       "Our renouwned kickboxing world champion strikes hard and fast. What an incredible image!",
     ],
     [149, new _Date(8, 12, 2022), true],
@@ -190,12 +190,12 @@ function loadTateCards(filter) {
       <div class="stats">
         <div class="image" style="background-image:${card.Display.Image}"></div>
         <div class="text">
-          <p>Price: ${card.RFPData.Price}</p>
+          <p>Price: $${card.RFPData.Price}</p>
           <p>Created On: ${card.RFPData.CreatedOn.toString()}</p>
-          <p>Created On: ${boolToForSale(card.RFPData.ForSale)}</p>
+          <p>${boolToForSale(card.RFPData.ForSale)}</p>
         </div>
-        <p>${card.Display.Bio}</p>
       </div>
+      <p>${card.Display.Bio}</p>
     </div>
     `;
   };

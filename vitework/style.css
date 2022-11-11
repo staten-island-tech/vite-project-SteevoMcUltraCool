@@ -67,17 +67,24 @@ body {
     width: 125px;
     z-index: 2;
 }
-#AboutUsIcon  + #AboutUsDropdownMenu {
+#AboutUsIcon+ #AboutUsDropdownMenu {
     display: none;
+    visibility: collapse;
     position: fixed;
     left : 0px;
     top: 50px;
-    width: 125px;
-    height: 100px;
+    width: 200px;
     background-color: var(--bgMidColor);
+    border: 2px solid var(--cardBorder);
+    z-index: 2;
 }
 #AboutUsIcon:hover  + #AboutUsDropdownMenu {
+    visibility: visible;
     display:inline;
+}
+#AboutUsIcon + #AboutUsDropdownMenu:hover {
+    visibility: visible;
+    display: inline;
 }
 
 
@@ -138,8 +145,8 @@ h1 {
     transition: all 0.35s;
 }
 #mommy .TC:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 0px 16px var(--boxShadow) ;
+    transform: scale(1.06);
+    box-shadow: 0px 0px 17px var(--boxShadow) ;
 }
 .stats {
     width: 100%;
@@ -196,7 +203,6 @@ h1 {
     margin: 0px 0px;
     margin-top: 15px;
     text-align: center;
-    text-shadow: 
-    1px 1px 0px black, -1px -1px 0px black, 1px -1px 0px black, -1px 1px 0px black;
+    filter: invert(20%);
 }
 

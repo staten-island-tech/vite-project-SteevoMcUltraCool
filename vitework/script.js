@@ -7,15 +7,17 @@ const Theme = {
     "--barText": "#020202",
     "--fontColor": "#000",
     "--cardBorder": "#999",
+    "--boxShadow": "#000"
   },
   "Basic Dark": {
     "--bgTopColor": "#010101",
     "--bgMidColor": "#121212",
     "--bgBottomColor": "#262626",
-    "--barColor": "#404040",
+    "--barColor": "#272727",
     "--barText": "#f9f9f9",
     "--fontColor": "#EAEAEA",
     "--cardBorder": "#bbb",
+    "--boxShadow": "#d2d2d2"
   },
   Toast: {
     "--bgTopColor": "#f6e8d8",
@@ -25,6 +27,7 @@ const Theme = {
     "--barText": "#332511",
     "--fontColor": "#000",
     "--cardBorder": "#522714",
+    "--boxShadow": "#181002"
   },
   Avocado: {
     "--bgTopColor": "#f9f5b6",
@@ -32,8 +35,9 @@ const Theme = {
     "--bgBottomColor": "#123512",
     "--barColor": "#602c18",
     "--barText": "#bfd74b",
-    "--fontColor": "#000",
+    "--fontColor": "#eee",
     "--cardBorder": "#bad149",
+    "--boxShadow": "#082008"
   },
 };
 function sleep(delayMs) {
@@ -108,7 +112,43 @@ let GrandSelection = [
       "Our renouwned kickboxing world champion strikes hard and fast. What an incredible image!",
     ],
     [149, new _Date(8, 12, 2022), true],
-    ["0xTFT2309012", "0xUPD7614801"]
+    ["0xTFT2409012", "0xUPD7614801"]
+  ),
+  new TateCard(
+    [
+      "Queen Andrew",
+      "url(https://img.buzzfeed.com/buzzfeed-static/static/2022-08/17/19/asset/4ff0a073fb14/sub-buzz-1076-1660765272-1.png?resize=625:430)",
+      "OMG SLAYYY QUEEN. This immaculate image of Andrew Tate is just so STUNNING",
+    ],
+    [2000, new _Date(3, 26, 2022), false],
+    ["0xTFT1308216", "0xUPD7614804"]
+  ),
+  new TateCard(
+    [
+      "SUS TATE",
+      "url(https://www.famousbirthdays.com/headshots/andrew-tate-3.jpg)",
+      "Andrew Tate lookin SUS",
+    ],
+    [9999, new _Date(9, 20, 2022), true],
+    ["0xTFT1308217", "0xUPD7614805"]
+  ),
+  new TateCard(
+    [
+      "Fish-Face Tate",
+      "url(https://th.bing.com/th/id/OIP.tmklL3kJHJ-ESviQmVv5lQHaDy?pid=ImgDet&rs=1)",
+      "Andrew tate spittin facts and lookin cute",
+    ],
+    [16730, new _Date(9, 18, 2022), false],
+    ["0xTFT1308218", "0xUPD7614804"]
+  ),
+  new TateCard(
+    [
+      "Cigar Tate",
+      "url(https://styles.redditmedia.com/t5_3yxceo/styles/communityIcon_9563wn17ksh61.png?width=256&s=dbbdba0368bf643ce51365af9da0738128e8e3d4)",
+      "Like a boss",
+    ],
+    [1972854, new _Date(10, 18, 2022), true],
+    ["0xTFT1308228", "0xUPD7614826"]
   ),
 ];
 
@@ -130,13 +170,6 @@ function changeTheme(theme) {
   Object.keys(theme).forEach(function (key) {
     DOM.root.style.setProperty(key, theme[key]);
   });
-  let bus = document.getElementsByClassName("themeBu");
-  Array.prototype.forEach.call(bus, (value) => {
-    value.style.transition = "all 0s";
-    value.dispatchEvent(themeChangeEvent);
-    sleep(10);
-    value.style.transition = "all 0.099s";
-  });
 }
 
 changeTheme(currentTheme);
@@ -153,17 +186,11 @@ function loadThemeDropDownMenu() {
       newDIV.style.backgroundColor = bgColor;
     };
     newDIV.onmouseup = function () {
-      let bgColor = currentTheme["--bgMidColor"];
-      newDIV.style.backgroundColor = bgColor;
+      newDIV.style.backgroundColor = "var(--bgMidColor)";
     };
     newDIV.onmouseleave = function () {
-      let bgColor = currentTheme["--bgMidColor"];
-      newDIV.style.backgroundColor = bgColor;
+      newDIV.style.backgroundColor = "var(--bgMidColor)";
     };
-    newDIV.addEventListener("changeTheme", (event) => {
-      let bgColor = currentTheme["--bgMidColor"];
-      newDIV.style.backgroundColor = bgColor;
-    });
     newDIV.innerHTML = key;
     DOM.TDDM.appendChild(newDIV);
   });
@@ -172,16 +199,17 @@ loadThemeDropDownMenu();
 function adjustTDDMposition() {
   let x = DOM.ThemeMenuSelector.getBoundingClientRect().left;
   DOM.TDDM.style.setProperty("--x", `${x - 25}px`);
+  DOM.mommy.style.height = `${window.innerHeight - 110}px`
 }
 adjustTDDMposition();
 window.onresize = adjustTDDMposition;
 function boolToForSale(boolean) {
   if (boolean) {
-    return "Up for Sale.";
+    return '<span class="good">Up for Sale. </span>';
   }
-  return "Not purchasable";
+  return '<span class="bad">Not Purchasable </span>';
 }
-function loadTateCards(filter) {
+function loadTateCards(filterBy) {
   let mommySTR = "";
   let LoadCardToString = function (card) {
     mommySTR = `${mommySTR} 
@@ -190,7 +218,7 @@ function loadTateCards(filter) {
       <div class="stats">
         <div class="image" style="background-image:${card.Display.Image}"></div>
         <div class="text">
-          <p>Price: $${card.RFPData.Price}</p>
+          <p>Price: <span class="pricetag">$${card.RFPData.Price}</span></p>
           <p>Created On: ${card.RFPData.CreatedOn.toString()}</p>
           <p>${boolToForSale(card.RFPData.ForSale)}</p>
         </div>
@@ -199,7 +227,16 @@ function loadTateCards(filter) {
     </div>
     `;
   };
-  GrandSelection.forEach(LoadCardToString);
+  GrandSelection.filter(filterBy).forEach(LoadCardToString);
   DOM.mommy.innerHTML = mommySTR;
 }
-loadTateCards();
+loadTateCards(function(){return 0==0});
+let ForSaleFilter = false
+function toggleForSaleFilter(){
+  ForSaleFilter = !ForSaleFilter
+  if (ForSaleFilter) {
+    return loadTateCards(function(value){return value.RFPData.ForSale})
+  }else{
+    return loadTateCards(function(){return 0==0});
+  }
+}

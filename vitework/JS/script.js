@@ -6,6 +6,7 @@ const DOM = {
   TDDM: document.getElementById("ThemeDropDownMenu"),
   ThemeMenuSelector: document.getElementById("ThemeMenuIcon"),
   mommy: document.getElementById("mommy"),
+  bozo: document.getElementById("bozo"),
 };
 
 let currentTheme = Theme["Basic Light"];
@@ -98,3 +99,5 @@ function toggleForSaleFilter() {
     });
   }
 }
+
+DOM.bozo.addEventListener("click", toggleForSaleFilter);

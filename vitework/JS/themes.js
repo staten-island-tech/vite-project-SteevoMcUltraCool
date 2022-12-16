@@ -38,6 +38,16 @@ const eTheme = {
     "--fontColor": "#eee",
     "--cardBorder": "#bad149",
     "--boxShadow": "#082008",
+  },  
+  "Milky Way": {
+    "--bgTopColor": "#22002f",
+    "--bgMidColor": "#330044",
+    "--bgBottomColor": "#440055",
+    "--barColor": "#000",
+    "--barText": "#fff",
+    "--fontColor": "#fff",
+    "--cardBorder": "#fff",
+    "--boxShadow": "#fff",
   },
 };
 

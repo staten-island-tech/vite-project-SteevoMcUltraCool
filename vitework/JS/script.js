@@ -57,11 +57,7 @@ function boolToForSale(boolean) {
   return '<span class="bad">Not Purchasable </span>';
 }
 function loadTateCards(filterBy) {
-  filterBy =
-    filterBy ||
-    function () {
-      return true;
-    };
+  filterBy =filterBy ||function () {return true;};
   let mommySTR = "";
   let LoadCardToString = function (card) {
     mommySTR = `${mommySTR} 

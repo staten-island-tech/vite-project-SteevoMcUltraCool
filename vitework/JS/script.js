@@ -8,6 +8,7 @@ const DOM = {
   ThemeMenuSelector: document.getElementById("ThemeMenuIcon"),
   mommy: document.getElementById("mommy"),
   bozo: document.getElementById("bozo"),
+  bozo2: document.getElementById("bozo2"),
 };
 
 let currentTheme = Theme["Basic Light"];
@@ -56,8 +57,9 @@ function boolToForSale(boolean) {
   }
   return '<span class="bad">Not Purchasable </span>';
 }
-function loadTateCards(filterBy) {
-  filterBy =filterBy ||function () {return true;};
+let forSaleFilter = false;
+let expensiveFilter = false;
+function loadTateCards() {
   let mommySTR = "";
   let LoadCardToString = function (card) {
     mommySTR = `${mommySTR} 
@@ -75,22 +77,22 @@ function loadTateCards(filterBy) {
     </div>
     `;
   };
-  GrandSelection.filter(filterBy).forEach(LoadCardToString);
+  GrandSelection.filter(
+    (element) =>
+      (!forSaleFilter || element.RFPData.ForSale) &&
+      (!expensiveFilter || element.RFPData.Price >= 1000)
+  ).forEach(LoadCardToString);
   DOM.mommy.innerHTML = mommySTR;
 }
 loadTateCards();
-let ForSaleFilter = false;
 function toggleForSaleFilter() {
-  ForSaleFilter = !ForSaleFilter;
-  if (ForSaleFilter) {
-    return loadTateCards(function (value) {
-      return value.RFPData.ForSale;
-    });
-  } else {
-    return loadTateCards(function () {
-      return 0 == 0;
-    });
-  }
+  forSaleFilter = !forSaleFilter;
+  loadTateCards();
+}
+function toggleExpensiveFilter() {
+  expensiveFilter = !expensiveFilter;
+  loadTateCards();
 }
 
 DOM.bozo.addEventListener("click", toggleForSaleFilter);
+DOM.bozo2.addEventListener("click", toggleExpensiveFilter);

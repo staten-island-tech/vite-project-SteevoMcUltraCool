@@ -1,4 +1,5 @@
 import { GS } from "./tates.js";
+import "../styles/style.css";
 let GrandSelection = GS;
 import { Theme } from "./themes.js";
 const DOM = {
@@ -10,11 +11,7 @@ const DOM = {
 };
 
 let currentTheme = Theme["Basic Light"];
-const themeChangeEvent = new Event("changeTheme", {
-  bubbles: true,
-  cancelable: true,
-  composed: false,
-});
+
 function changeTheme(theme) {
   currentTheme = theme;
   Object.keys(theme).forEach(function (key) {

@@ -39,6 +39,16 @@ const eTheme = {
     "--cardBorder": "#bad149",
     "--boxShadow": "#082008",
   },
+  Eggplant: {
+    "--bgTopColor": "#303",
+    "--bgMidColor": "#202",
+    "--bgBottomColor": "#101",
+    "--barColor": "#707",
+    "--barText": "#fff",
+    "--fontColor": "#fff",
+    "--cardBorder": "#000",
+    "--boxShadow": "#000",
+  },
 };
 
 export const Theme = eTheme;
